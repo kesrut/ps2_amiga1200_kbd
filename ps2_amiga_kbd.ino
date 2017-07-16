@@ -11,7 +11,8 @@
 #define GROUP1_CNT 85
 #define BREAK_GRP1 0xF0
 #define MAKE_GRP2 0xE0
-#define DEBUG
+#define DEBUG 1
+
 
 byte cycles = 0 ; 
 unsigned char value = 0 ; 
@@ -58,7 +59,7 @@ ps2_group1_type ps2_group1[] =
   {'x', 0x22, 1, 0x32},
   {'y', 0x35, 1, 0x15},
   {'z', 0x1A, 1, 0x31}, 
-  {'0', 0x45, 1, 0x00},
+  {'0', 0x45, 1, 0x0A},
   {'1', 0x16, 1, 0x01},
   {'2', 0x1E, 1, 0x02},
   {'3', 0x26, 1, 0x03},
@@ -75,11 +76,8 @@ ps2_group1_type ps2_group1[] =
   {'\b', 0x66, 0, 0x41}, // backsapce
   {' ', 0x29, 1, 0x40}, // space
   {'\t', 0x0D, 0, 0x0F}, // tab
-  {' ', 0x58, 0, 0x3A}, // caps
-  {' ', 0x12, 0, 0x60}, // left shift
   {' ', 0x14, 0, 0x63}, // left ctrl
   {' ', 0x11, 0, 0x64}, // left alt
-  {' ', 0x59, 0, 0x61}, // right shift
   {'\n', 0x5A, 1, 0x44}, // enter
   {' ', 0x76, 0, 0x45}, // esc
   {' ', 0x05, 0, 0x50}, // F1
@@ -117,6 +115,11 @@ ps2_group1_type ps2_group1[] =
   {',', 0x41, 1, 0x39},
   {'.', 0x49, 1, 0x38},
   {'/', 0x4A, 1, 0x3A}, 
+  
+  {' ', 0x12, 0, 0x60}, // left shift
+  {' ', 0x59, 0, 0x61}, // right shift
+  {' ', 0x58, 0, 0x62}, // caps
+  
 } ; 
 
 
@@ -189,15 +192,15 @@ void _write(unsigned char value)
 }
 
 byte i = 0 ;
-void loop() 
-{
+void loop() {
   label_start:
   unsigned char code = _read() ; 
 #ifdef DEBUG
-  if (code != 0) Serial.println(code, HEX) ; 
+  if (code != 0){
+  Serial.println(code, HEX) ; 
+}
 #endif
-  if (code == BREAK_GRP1)
-  {
+  if (code == BREAK_GRP1) {
      delay(4) ; 
      unsigned char break_code = _read() ; 
      unsigned char i = 0 ; 
