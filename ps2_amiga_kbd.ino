@@ -8,6 +8,8 @@ PS2KeyAdvanced keyboard;
 #define amiga_clk 5
 #define amiga_data 4
 
+
+
 #define DEBUG 1
 
 unsigned char translationTable [256];
