@@ -18,7 +18,5 @@ amiga_data and amiga_clk is hooked to A1200 motherboard keyboard micro (68HC05C)
 #define ps_data 3
 ```
 
-ps_clk must be interrupt pin. To use 2 pin it's OK. 
-
-blog post: https://kesrut.wordpress.com/2017/02/04/resurrecting-amiga-1200/
+Please add https://github.com/techpaul/PS2KeyAdvanced Arduino library to compile.
 
